@@ -1,0 +1,60 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProgramCheck"
+        xmlns:IpAddressControl="clr-namespace:IpAddressControl;assembly=IpAddressControl" x:Class="ProgramCheck.MainWindow"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Title="ProgramChecker" Height="450" Width="800" ResizeMode="NoResize">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TabControl HorizontalAlignment="Left" Height="402" VerticalAlignment="Top" Width="774" Margin="10,10,0,0" SelectionChanged="TabControl_SelectionChanged">
+            <TabItem Header="프로그램 체크">
+                <Grid Background="#FFE5E5E5">
+                    <ListBox SelectionChanged="ListBox_SelectionChanged" x:Name="ProgramList" Margin="39,36,443,58"/>
+                    <Button Content="Update Lists" HorizontalAlignment="Left" Height="40" Margin="450,315,0,0" VerticalAlignment="Top" Width="100" Click="Updatebtn_Click" RenderTransformOrigin="0.494,0.629"/>
+                    <Button Content="프로그램&#xA;설치" HorizontalAlignment="Left" Height="40" Margin="450,260,0,0" VerticalAlignment="Top" Width="100" Click="install_Click" RenderTransformOrigin="0.494,0.629" IsEnabled="False" x:Name="Install_Button"/>
+                    <Button Content="Program&#xA;Setting" HorizontalAlignment="Left" Height="40" Margin="569,315,0,0" VerticalAlignment="Top" Width="100" Click="PrgSetbtn_Click" RenderTransformOrigin="0.494,0.629"/>
+                    <Button Content="프로그램&#xA;삭제" HorizontalAlignment="Left" Height="40" Margin="569,260,0,0" VerticalAlignment="Top" Width="100" Click="Uninstall_Click" RenderTransformOrigin="0.494,0.629" IsEnabled="False" x:Name="Uninstall_Button"/>
+                    <ListView HorizontalAlignment="Left" Height="222" VerticalAlignment="Top" Width="408" Margin="346,12,0,0" x:Name="Program_View">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.ColumnHeaderContextMenu>
+                                    <ContextMenu/>
+                                </GridView.ColumnHeaderContextMenu>
+                                <GridViewColumn Header="Key" Width="100" DisplayMemberBinding="{Binding Key}"/>
+                                <GridViewColumn Header="Value" Width="300" DisplayMemberBinding="{Binding Value}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Grid Margin="21,325,420,19" UseLayoutRounding="True">
+                        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="26" Stroke="Black" VerticalAlignment="Top" Width="323"/>
+                        <RadioButton Content="모든 프로그램" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Checked="Allbtn_Checked" IsChecked="True" x:Name="AllProgram_radbtn"/>
+                        <RadioButton Content="설치 프로그램" HorizontalAlignment="Left" Margin="109,5,0,0" VerticalAlignment="Top" Checked="Installedbtn_Checked" x:Name="InstalledProgram_radbtn"/>
+                        <RadioButton Content="미설치 프로그램" HorizontalAlignment="Left" Margin="210,5,0,0" VerticalAlignment="Top" Checked="Uninstalledbtn_Checked" x:Name="UninstalledProgram_radbtn"/>
+                    </Grid>
+                    <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="162" RenderTransformOrigin="0.983,1.727" Margin="39,9,0,0" SelectionChanged="ComboBox_SelectionChanged">
+                        <ComboBoxItem Content="프레스 핸들러"/>
+                        <ComboBoxItem Content="프레스 핸들러 + 비젼"/>
+                        <ComboBoxItem Content="편면연삭기 핸들러"/>
+                        <ComboBoxItem Content="CVD 핸들러"/>
+                        <ComboBoxItem Content="PVD 핸들러"/>
+                        <ComboBoxItem Content="포장기"/>
+                        <ComboBoxItem Content="검사기"/>
+                    </ComboBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="IP 체크">
+                <Grid Background="#FFE5E5E5">
+                    <IpAddressControl:IpAddressControl BorderThickness="1" BorderBrush="#666" DataContext="{Binding IpAddressViewModel1, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" Width="150" Height="25" Margin="60,100,554,245" x:Name="IPaddress1"/>
+                    <IpAddressControl:IpAddressControl BorderThickness="1" BorderBrush="#666" DataContext="{Binding IpAddressViewModel2, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" Width="150" Height="25" Margin="60,30,554,315" x:Name="IPaddress2"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
